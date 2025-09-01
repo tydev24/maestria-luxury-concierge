@@ -1,22 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Playfair_Display, Inter } from "next/font/google"
+// removed Google font imports to avoid network fetch during build
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { LanguageProvider } from "@/lib/language-context"
 import "./globals.css"
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-playfair",
-})
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-})
+// use system fonts instead of fetching Google Fonts at build time
 
 export const metadata: Metadata = {
   title: "Maestria Luxury Concierge - Your life. Our mastery.",
@@ -25,6 +15,11 @@ export const metadata: Metadata = {
   generator: "v0.app",
   keywords:
     "luxury concierge, private villas, yacht charter, private chef, exclusive events, French Riviera, Ibiza, Costa Blanca, Paris",
+  icons: {
+  icon: "/images/logo-m.jpg",
+  apple: "/images/logo-m.jpg",
+  shortcut: "/images/logo-m.jpg",
+  },
 }
 
 export default function RootLayout({
@@ -34,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${playfair.variable} ${inter.variable} antialiased`}>
+      <body className={`font-sans antialiased`}>
         <LanguageProvider>
           <Suspense fallback={null}>
             {children}

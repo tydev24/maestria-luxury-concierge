@@ -7,11 +7,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { translations, type Language } from "@/lib/translations"
+import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/language-context"
 import { MessageCircle, Users, Award, Globe, Shield, Home, Utensils, Calendar, Anchor } from "lucide-react"
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<Language>("fr")
+  const { language } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
 
   const t = translations[language]
@@ -23,7 +24,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation language={language} onLanguageChange={setLanguage} />
+  <Navigation />
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -313,7 +314,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Footer language={language} />
+  <Footer />
       <WhatsAppButton />
     </div>
   )

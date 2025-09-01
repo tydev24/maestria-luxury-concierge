@@ -5,12 +5,13 @@ import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { translations, type Language } from "@/lib/translations"
+import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/language-context"
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
 
 export default function VillasYachtsPage() {
-  const [language, setLanguage] = useState<Language>("fr")
+  const { language } = useLanguage()
   const t = translations[language]
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function VillasYachtsPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation language={language} onLanguageChange={setLanguage} />
+  <Navigation />
 
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-card overflow-hidden">
@@ -196,7 +197,7 @@ export default function VillasYachtsPage() {
         </div>
       </section>
 
-      <Footer language={language} />
+  <Footer />
       <WhatsAppButton />
     </div>
   )

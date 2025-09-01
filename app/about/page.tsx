@@ -5,12 +5,13 @@ import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { translations, type Language } from "@/lib/translations"
+import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/language-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, Award, Globe, Shield } from "lucide-react"
 
 export default function AboutPage() {
-  const [language, setLanguage] = useState<Language>("fr")
+  const { language } = useLanguage()
   const t = translations[language]
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation language={language} onLanguageChange={setLanguage} />
+  <Navigation />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-40 bg-card overflow-hidden min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center">
@@ -155,7 +156,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Footer language={language} />
+  <Footer />
       <WhatsAppButton />
     </div>
   )

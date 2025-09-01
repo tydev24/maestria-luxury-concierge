@@ -5,7 +5,8 @@ import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { translations, type Language } from "@/lib/translations"
+import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/language-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, MessageCircle, Instagram, Facebook, Clock } from "lucide-react"
 
 export default function ContactPage() {
-  const [language, setLanguage] = useState<Language>("fr")
+  const { language } = useLanguage()
   const t = translations[language]
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation language={language} onLanguageChange={setLanguage} />
+  <Navigation />
 
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-card overflow-hidden">
@@ -228,7 +229,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <Footer language={language} />
+  <Footer />
       <WhatsAppButton />
     </div>
   )
